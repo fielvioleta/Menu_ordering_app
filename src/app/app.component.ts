@@ -17,9 +17,9 @@ export class MyApp {
     platform.ready().then(() => {
     });
 
-    this.restProvider.getProducts().then(data => {
-      console.log(data);
-    });
+    // this.restProvider.getProducts().then(data => {
+    //   console.log(data);
+    // });
   }
 
 }

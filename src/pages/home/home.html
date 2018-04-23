@@ -1,14 +1,14 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content scroll="false" class="as-welcome-view">
+  <ion-slides 
+    [loop]="true"
+    [pager]="true"
+    [autoplay]="2000">
+    <ion-slide *ngFor="let image of images" [style.background-image]="image.imagePath"><div class="overlay"></div></ion-slide>
+  </ion-slides>
+  <div layout-padding class="buttons-field">
+    <button ion-button class="button button-block button-positive">
+      Dine-in
+    </button>
+  </div>
 </ion-content>
+  
