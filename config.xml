@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>test</name>
+    <name>Menu ordering</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
     <content src="index.html" />
@@ -86,4 +86,5 @@
     <engine name="browser" spec="5.0.3" />
     <plugin name="phonegap-plugin-barcodescanner" spec="^7.1.1" />
     <plugin name="cordova-plugin-x-toast" spec="^2.6.2" />
+    <engine name="android" spec="~6.3.0" />
 </widget>

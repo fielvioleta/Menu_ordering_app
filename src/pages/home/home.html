@@ -1,4 +1,4 @@
-<ion-content scroll="false" class="as-welcome-view">
+<ion-content scroll="false" class="as-welcome-view" *ngIf="!isLoggedIn">
   <ion-slides 
     [loop]="true"
     [pager]="true"
@@ -6,9 +6,14 @@
     <ion-slide *ngFor="let image of images" [style.background-image]="image.imagePath"><div class="overlay"></div></ion-slide>
   </ion-slides>
   <div layout-padding class="buttons-field">
-    <button ion-button class="button button-block button-positive">
+    <button ion-button class="button button-block button-positive" (click)="scan()">
       Dine-in
     </button>
   </div>
 </ion-content>
-  
+
+
+<ion-content scroll="false" class="as-welcome-view" *ngIf="isLoggedIn">
+  loggedin    
+</ion-content>
+    

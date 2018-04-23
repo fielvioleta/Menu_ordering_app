@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner';
+import { Toast } from '@ionic-native/toast';
 
 @Component({
   selector: 'page-home',
@@ -8,10 +10,13 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browse
 })
 export class HomePage {
   images = [];
-  
+  isLoggedIn = false;
+
   constructor(
     public navCtrl: NavController,
-    private _sanitizer: DomSanitizer
+    private _sanitizer: DomSanitizer,
+    private barcodeScanner: BarcodeScanner,
+    private toast: Toast,
   ) {
     // this.sanitization.bypassSecurityTrustStyle(`url(${element.image})`);
     this.images.push(
@@ -22,4 +27,17 @@ export class HomePage {
     );
   }
 
+  scan() {
+    this.barcodeScanner.scan().then((barcodeData) => {
+      if( barcodeData.text ) {
+        this.isLoggedIn = true;
+      }
+    }, (err) => {
+      this.toast.show(err, '5000', 'center').subscribe(
+        toast => {
+          console.log(toast);
+        }
+      );
+    });
+  }
 }
