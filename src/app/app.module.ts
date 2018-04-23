@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { LandingPage } from '../pages/landing/landing';
 
 import { HttpClientModule } from '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
@@ -13,10 +14,12 @@ import { RestProvider } from '../providers/rest/rest';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Toast } from '@ionic-native/toast';
 
+
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    LandingPage
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,8 @@ import { Toast } from '@ionic-native/toast';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    LandingPage
   ],
   providers: [
     StatusBar,

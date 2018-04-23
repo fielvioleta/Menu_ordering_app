@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { DomSanitizer } from '@angular/platform-browser';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Toast } from '@ionic-native/toast';
+import { LandingPage } from '../landing/landing';
 
 @Component({
   selector: 'page-home',
@@ -10,7 +11,6 @@ import { Toast } from '@ionic-native/toast';
 })
 export class HomePage {
   images = [];
-  isLoggedIn = false;
 
   constructor(
     public navCtrl: NavController,
@@ -18,7 +18,6 @@ export class HomePage {
     private barcodeScanner: BarcodeScanner,
     private toast: Toast,
   ) {
-    // this.sanitization.bypassSecurityTrustStyle(`url(${element.image})`);
     this.images.push(
       { imagePath: this._sanitizer.bypassSecurityTrustStyle(`url(assets/imgs/welcome-1.jpg)`)},
       { imagePath: this._sanitizer.bypassSecurityTrustStyle(`url(assets/imgs/welcome-2.jpg)`)},
@@ -28,16 +27,17 @@ export class HomePage {
   }
 
   scan() {
-    this.barcodeScanner.scan().then((barcodeData) => {
-      if( barcodeData.text ) {
-        this.isLoggedIn = true;
-      }
-    }, (err) => {
-      this.toast.show(err, '5000', 'center').subscribe(
-        toast => {
-          console.log(toast);
-        }
-      );
-    });
+    this.navCtrl.push(LandingPage);
+    // this.barcodeScanner.scan().then((barcodeData) => {
+    //   if( barcodeData.text ) {
+        
+    //   }
+    // }, (err) => {
+    //   this.toast.show(err, '5000', 'center').subscribe(
+    //     toast => {
+    //       console.log(toast);
+    //     }
+    //   );
+    // });
   }
 }
