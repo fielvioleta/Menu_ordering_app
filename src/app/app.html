@@ -1,7 +1,48 @@
-<ion-menu [content]="content">
-    <ion-content padding>
-        <h4>test</h4>
+<!-- <ion-menu [content]="content">
+    <ion-header >
+        <ion-navbar>
+
+        </ion-navbar>
+    </ion-header>
+    <ion-content>
+
     </ion-content>
+</ion-menu> -->
+
+
+<ion-menu [content]="content">
+<ion-header>
+    <ion-toolbar>
+    <ion-title>Menu</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-list>
+        <ion-item nav-clear menu-close class="item-icon-left" href="#/app/home">
+            <i class="icon ion-ios-home"></i>
+            <span>Home</span>
+        </ion-item>
+        <ion-item nav-clear menu-close class="item-icon-left" href="#/app/restaurant-cart">
+            <i class="icon ion-ios-cart"></i>
+            <span>Shopping Cart</span>
+        </ion-item>
+        <ion-item nav-clear class="item-divider">
+            Categories
+        </ion-item>
+
+        <ion-item nav-clear menu-close class="item-icon-left">
+            <i class="icon ion-soup-can"></i>
+            <span>test</span>
+        </ion-item>
+       
+        <ion-item ng-click="vm.logout()" class="item-icon-left">
+            <i class="icon ion-android-exit"></i>
+            <span>Logout</span>
+        </ion-item>
+    </ion-list>
+</ion-content>
 </ion-menu>
+        
+
 
 <ion-nav #content [root]="rootPage"></ion-nav>
