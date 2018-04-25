@@ -15,21 +15,28 @@
 
 <ion-content>
   <h1 class="padding-top padding-left padding-right">Sample Restaurant</h1>
-  <div class="row colums-two">
+  
+  <div *ngFor="let category of categories; let index = index">
+    <div class="row colums-two" *ngIf="index%2==0">
+      <div class="card col home" 
+        (click)="navToProductsBycateg(category.Category.id)">
+          <a class="item item-text-wrap">
+            <h1><ion-icon name="restaurant"></ion-icon></h1>
+            <h2>{{category.Category.name}}</h2>
+          </a>
+      </div>
 
-    <div class="card col home" (click)="navToProductsBycateg()">
-      <a class="item item-text-wrap">
-        <h1><i class="icon ion-soup-can"></i></h1>
-        <h2>test</h2>
-      </a>
+      <div class="card col home" 
+        *ngIf="categories[index+1]"
+        (click)="navToProductsBycateg(categories[index+1].Category.id)">
+          <a class="item item-text-wrap">
+            <h1><ion-icon name="restaurant"></ion-icon></h1>
+            <h2>{{categories[index+1].Category.name}}</h2>
+          </a>
+      </div>
     </div>
+  </div>
+
     
-    <div class="card col home">
-      <a class="item item-text-wrap">
-        <h1><i class="icon ion-soup-can"></i></h1>
-        <h2>test</h2>
-      </a>
-    </div>
-    
-		</div>
-	</ion-content>
+
+</ion-content>
