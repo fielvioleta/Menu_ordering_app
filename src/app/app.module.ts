@@ -7,6 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LandingPage } from '../pages/landing/landing';
+import { ProductsPage } from './../pages/products/products';
 
 import { HttpClientModule } from '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
@@ -19,7 +20,8 @@ import { Toast } from '@ionic-native/toast';
   declarations: [
     MyApp,
     HomePage,
-    LandingPage
+    LandingPage,
+    ProductsPage
   ],
   imports: [
     BrowserModule,
@@ -30,7 +32,8 @@ import { Toast } from '@ionic-native/toast';
   entryComponents: [
     MyApp,
     HomePage,
-    LandingPage
+    LandingPage,
+    ProductsPage
   ],
   providers: [
     StatusBar,

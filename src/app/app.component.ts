@@ -8,7 +8,8 @@ import { HomePage } from '../pages/home/home';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  rootPage      : any = HomePage;
+  categories;
 
   constructor(
     platform: Platform,
@@ -17,9 +18,9 @@ export class MyApp {
     platform.ready().then(() => {
     });
 
-    // this.restProvider.getProducts().then(data => {
-    //   console.log(data);
-    // });
+    this.restProvider.getCategories().then(data => {
+      this.categories = data;
+    });
   }
 
 }

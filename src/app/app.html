@@ -1,15 +1,3 @@
-<!-- <ion-menu [content]="content">
-    <ion-header >
-        <ion-navbar>
-
-        </ion-navbar>
-    </ion-header>
-    <ion-content>
-
-    </ion-content>
-</ion-menu> -->
-
-
 <ion-menu [content]="content">
 <ion-header>
     <ion-toolbar>
@@ -30,13 +18,13 @@
             Categories
         </ion-item>
 
-        <ion-item nav-clear menu-close class="item-icon-left">
-            <i class="icon ion-soup-can"></i>
-            <span>test</span>
+        <ion-item nav-clear menu-close class="item-icon-left" href="#/app/restaurant-cart" *ngFor="let category of categories">
+            <ion-icon name="restaurant"></ion-icon>
+            <span>{{category.Category.name}}</span>
         </ion-item>
        
         <ion-item ng-click="vm.logout()" class="item-icon-left">
-            <i class="icon ion-android-exit"></i>
+            <ion-icon name="exit"></ion-icon>
             <span>Logout</span>
         </ion-item>
     </ion-list>
