@@ -36,8 +36,10 @@ export class LandingPage {
   ionViewDidLoad() {
   }
 
-  navToProductsBycateg(id: number) {
-    alert(id);
-    this.navCtrl.push(ProductsPage);
+  navToProductsBycateg(id: number, name: string) {
+    this.navCtrl.push(ProductsPage, {
+      categoryId: id,
+      categoryName: name,
+    });
   };
 }

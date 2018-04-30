@@ -19,7 +19,7 @@
   <div *ngFor="let category of categories; let index = index">
     <div class="row colums-two" *ngIf="index%2==0">
       <div class="card col home" 
-        (click)="navToProductsBycateg(category.Category.id)">
+        (click)="navToProductsBycateg(category.Category.id, category.Category.name)">
           <a class="item item-text-wrap">
             <h1><ion-icon name="restaurant"></ion-icon></h1>
             <h2>{{category.Category.name}}</h2>
@@ -28,7 +28,7 @@
 
       <div class="card col home" 
         *ngIf="categories[index+1]"
-        (click)="navToProductsBycateg(categories[index+1].Category.id)">
+        (click)="navToProductsBycateg(categories[index+1].Category.id, categories[index+1].Category.name)">
           <a class="item item-text-wrap">
             <h1><ion-icon name="restaurant"></ion-icon></h1>
             <h2>{{categories[index+1].Category.name}}</h2>

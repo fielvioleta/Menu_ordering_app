@@ -5,7 +5,7 @@
     </button>
 
     <ion-title>
-      Page Title
+      {{categoryName}}
     </ion-title>
 
     <ion-buttons end>
@@ -17,6 +17,34 @@
 
 </ion-header>
   
-<ion-content padding>
+<ion-content class="products-list">
+  <div *ngFor="let product of products; let index = index">
+    <div class="row colums-two" *ngIf="index%2==0">
 
+      <div class="card col">
+        <div class="item item-image">
+          <img src="{{product.image_path}}" class="product-list-image">
+        </div>
+  
+        <a class="item">
+          <h3>{{product.name}}</h3>
+          <h4>{{product.price}}</h4>
+        </a>
+      </div>
+
+      <div class="card col"
+        [ngStyle]="{'visibility': products[index+1] ? 'visible' : 'hidden' }"
+        >
+        <div class="item item-image">
+          <img src="{{products[index+1]?.image_path}}" class="product-list-image">
+        </div>
+
+        <a class="item">
+          <h3>{{products[index+1]?.name}}</h3>
+          <h4>{{products[index+1]?.price}}</h4>
+        </a>
+      </div>
+
+    </div>
+  </div>
 </ion-content>

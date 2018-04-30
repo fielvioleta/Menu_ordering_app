@@ -11,8 +11,9 @@ import { Injectable } from '@angular/core';
 export class RestProvider {
 
   // domain = 'http://menu.local';
-  // domain = 'http://10.163.90.25/menu_ordering';
-  domain = 'http://192.168.0.102/menu_ordering';
+  domain = 'http://10.163.90.25/menu_ordering';
+  currency = 'PHP';
+  // domain = 'http://192.168.0.102/menu_ordering';
 
   constructor(public http: HttpClient) { }
 
@@ -30,6 +31,28 @@ export class RestProvider {
     return new Promise(resolve => {
       this.http.get(this.domain+'/getCategories').subscribe(data => {
         resolve(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+
+  getProductsByCategory(categoryId: number) {
+    const returnData = [];
+    return new Promise(resolve => {
+      this.http.get(this.domain+'/getProductsByCategoryId/'+categoryId).subscribe(data => {
+        Object.keys(data).forEach(key => {
+          returnData.push({
+            'category_id'       : data[key]['Product']['category_id'],
+            'description'       : data[key]['Product']['description'],
+            'id'                : data[key]['Product']['id'],
+            'image_path'        : data[key]['Product']['image_path'] ?  this.domain + data[key]['Product']['image_path'] : this.domain + '/images/default.jpg',
+            'is_not_available'  : data[key]['Product']['is_not_available'],
+            'name'              : data[key]['Product']['name'],
+            'price'             : this.currency + ' ' +data[key]['Product']['price'],
+          });
+        });
+        resolve(returnData);
       }, err => {
         console.log(err);
       });

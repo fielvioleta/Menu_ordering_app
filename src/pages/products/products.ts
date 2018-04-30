@@ -1,3 +1,4 @@
+import { RestProvider } from './../../providers/rest/rest';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -14,8 +15,21 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'products.html',
 })
 export class ProductsPage {
+  categoryId: number;
+  categoryName: string;
+  products;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public restProvider: RestProvider
+  ) {
+    this.categoryId   = this.navParams.data.categoryId;
+    this.categoryName = this.navParams.data.categoryName
+
+    this.restProvider.getProductsByCategory(this.categoryId).then(data => {
+      this.products = data;
+    });
   }
 
   ionViewDidLoad() {  }

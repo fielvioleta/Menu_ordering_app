@@ -2,6 +2,7 @@
   <ion-slides 
     [loop]="true"
     [pager]="true"
+    [speed]="1000"
     [autoplay]="2000">
     <ion-slide *ngFor="let image of images" [style.background-image]="image.imagePath"><div class="overlay"></div></ion-slide>
   </ion-slides>
