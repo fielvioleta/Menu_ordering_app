@@ -19,7 +19,7 @@
   <div *ngFor="let product of products; let index = index">
     <div class="row colums-two" *ngIf="index%2==0">
 
-      <div class="card col">
+      <div class="card col" (click)="navToProduct(product)">
         <div class="item item-image">
           <img src="{{product.image_path}}" class="product-list-image">
         </div>

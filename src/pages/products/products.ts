@@ -2,6 +2,8 @@ import { RestProvider } from './../../providers/rest/rest';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { ProductPage } from './../product/product';
+
 /**
  * Generated class for the ProductsPage page.
  *
@@ -34,4 +36,9 @@ export class ProductsPage {
 
   ionViewDidLoad() {  }
 
+  navToProduct(product: any) {
+    this.navCtrl.push(ProductPage, {
+      data: product
+    });
+  }
 }

@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LandingPage } from '../pages/landing/landing';
 import { ProductsPage } from './../pages/products/products';
+import { ProductPage } from './../pages/product/product';
 
 import { HttpClientModule } from '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
@@ -21,7 +22,8 @@ import { Toast } from '@ionic-native/toast';
     MyApp,
     HomePage,
     LandingPage,
-    ProductsPage
+    ProductsPage,
+    ProductPage
   ],
   imports: [
     BrowserModule,
@@ -33,7 +35,8 @@ import { Toast } from '@ionic-native/toast';
     MyApp,
     HomePage,
     LandingPage,
-    ProductsPage
+    ProductsPage,
+    ProductPage
   ],
   providers: [
     StatusBar,
