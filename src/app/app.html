@@ -6,11 +6,11 @@
 </ion-header>
 <ion-content>
     <ion-list>
-        <ion-item nav-clear menu-close class="item-icon-left" href="#/app/home">
+        <ion-item nav-clear menu-close class="item-icon-left" (click)="navToHome()">
             <i class="icon ion-ios-home"></i>
             <span>Home</span>
         </ion-item>
-        <ion-item nav-clear menu-close class="item-icon-left" href="#/app/restaurant-cart">
+        <ion-item nav-clear menu-close class="item-icon-left" (click)="navToCart()">
             <i class="icon ion-ios-cart"></i>
             <span>Shopping Cart</span>
         </ion-item>

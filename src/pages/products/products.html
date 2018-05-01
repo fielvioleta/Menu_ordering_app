@@ -1,22 +1,20 @@
-<ion-header>
-  <ion-navbar>
+<ion-header class="bar-stable bar bar-header">
+  <ion-toolbar>
     <button ion-button icon-only menuToggle>
-      <ion-icon name="menu"></ion-icon>
+      <ion-icon name='menu'></ion-icon>
     </button>
-
     <ion-title>
       {{categoryName}}
     </ion-title>
-
-    <ion-buttons end>
-      <button ion-button icon-only (click)="openModal()">
+    <ion-buttons right>
+      <button ion-button icon-only menuToggle="right">
         <ion-icon name="ios-cart"></ion-icon>
       </button>
     </ion-buttons>
-  </ion-navbar>
-
+  </ion-toolbar>
 </ion-header>
-  
+
+
 <ion-content class="products-list">
   <div *ngFor="let product of products; let index = index">
     <div class="row colums-two" *ngIf="index%2==0">

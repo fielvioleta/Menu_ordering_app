@@ -4,6 +4,7 @@ import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, MenuController } from 'ionic-angular';
 
 import { HomePage } from '../pages/home/home';
+import { LandingPage } from './../pages/landing/landing';
 
 @Component({
   templateUrl: 'app.html'
@@ -33,6 +34,14 @@ export class MyApp {
     });
     this.menuCtrl.close();
   };
+  
+  navToHome() {
+    this.nav.push(LandingPage);
+    this.menuCtrl.close();
+  }
+  
+  navToCart() {
 
+  }
 }
 
