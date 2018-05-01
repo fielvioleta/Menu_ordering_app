@@ -16,6 +16,25 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content >
 
+  <ion-slides >
+    <ion-slide><div class="box blue"><img src="{{product.image_path}}"/></div></ion-slide>
+  </ion-slides>
+
+  <div class="content-inner">
+    <h3>{{product.name}}</h3>
+    <p>{{product.price}}</p>
+    <p class="padding-vertical">{{product.description}}</p>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <a class="button button-block">
+        <ion-icon name="ios-cart-outline"></ion-icon>&nbsp;
+        Add to cart
+      </a>
+    </div>
+  </div>
+  
 </ion-content>

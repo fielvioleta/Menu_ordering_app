@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class RestProvider {
   // domain = 'http://10.163.90.25/menu_ordering';
-  currency = 'PHP';
+  currency = '₱';
   domain = 'http://192.168.0.102/menu_ordering';
 
   constructor(public http: HttpClient) { }

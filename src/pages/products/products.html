@@ -32,6 +32,7 @@
 
       <div class="card col"
         [ngStyle]="{'visibility': products[index+1] ? 'visible' : 'hidden' }"
+        (click)="navToProduct(products[index+1])"
         >
         <div class="item item-image">
           <img src="{{products[index+1]?.image_path}}" class="product-list-image">

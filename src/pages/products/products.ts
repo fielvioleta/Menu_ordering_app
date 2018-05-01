@@ -37,8 +37,6 @@ export class ProductsPage {
   ionViewDidLoad() {  }
 
   navToProduct(product: any) {
-    this.navCtrl.push(ProductPage, {
-      data: product
-    });
+    this.navCtrl.push(ProductPage, product);
   }
 }
