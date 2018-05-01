@@ -18,7 +18,7 @@
             Categories
         </ion-item>
 
-        <ion-item nav-clear menu-close class="item-icon-left" href="#/app/restaurant-cart" *ngFor="let category of categories">
+        <ion-item nav-clear menu-close class="item-icon-left" *ngFor="let category of categories" (click)="navToProductsBycateg(category.Category.id, category.Category.name)">
             <ion-icon name="restaurant"></ion-icon>
             <span>{{category.Category.name}}</span>
         </ion-item>
