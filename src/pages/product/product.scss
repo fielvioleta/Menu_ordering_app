@@ -2,4 +2,13 @@ page-product {
     ion-slides {
         height: unset;
     }
+    .image-container {
+        max-height: 239px;
+        width: 100%;
+
+        img {
+            min-width: 100%;
+            max-height: 100%;
+        }
+    }
 }
