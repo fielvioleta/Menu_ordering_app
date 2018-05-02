@@ -9,6 +9,7 @@ import { HomePage } from '../pages/home/home';
 import { LandingPage } from '../pages/landing/landing';
 import { ProductsPage } from './../pages/products/products';
 import { ProductPage } from './../pages/product/product';
+import { CartPage } from '../pages/cart/cart';
 
 import { HttpClientModule } from '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
@@ -16,14 +17,14 @@ import { RestProvider } from '../providers/rest/rest';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Toast } from '@ionic-native/toast';
 
-
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     LandingPage,
     ProductsPage,
-    ProductPage
+    ProductPage,
+    CartPage
   ],
   imports: [
     BrowserModule,
@@ -36,7 +37,8 @@ import { Toast } from '@ionic-native/toast';
     HomePage,
     LandingPage,
     ProductsPage,
-    ProductPage
+    ProductPage,
+    CartPage
   ],
   providers: [
     StatusBar,
