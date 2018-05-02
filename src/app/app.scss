@@ -4999,12 +4999,19 @@ a.button .icon:before, a.button.icon:before, a.button.icon-left:before, a.button
   top: 18px;
   left: 50px;
 }
+
 .card.col.home a{
   color: #444
 }
+
 .card.col.home h2{
   font-size: 16px;
 }
+
 .product-list-image {
   max-height:129px
+}
+
+.item.item-image {
+  height: 115px;
 }
