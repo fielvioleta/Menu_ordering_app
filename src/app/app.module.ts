@@ -13,6 +13,7 @@ import { CartPage } from '../pages/cart/cart';
 
 import { HttpClientModule } from '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
+import { GlobalProvider } from '../providers/global/global';
 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Toast } from '@ionic-native/toast';
@@ -46,7 +47,8 @@ import { Toast } from '@ionic-native/toast';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     RestProvider,
     BarcodeScanner,
-    Toast
+    Toast,
+    GlobalProvider
   ]
 })
 export class AppModule {}
