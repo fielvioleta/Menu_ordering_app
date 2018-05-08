@@ -17,6 +17,7 @@ import { GlobalProvider } from '../providers/global/global';
 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Toast } from '@ionic-native/toast';
+import { FCM } from '@ionic-native/fcm';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { Toast } from '@ionic-native/toast';
     RestProvider,
     BarcodeScanner,
     Toast,
-    GlobalProvider
+    GlobalProvider,
+    FCM
   ]
 })
 export class AppModule {}
