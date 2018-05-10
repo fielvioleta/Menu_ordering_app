@@ -9,15 +9,14 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class RestProvider {
-  // domain = 'http://10.163.90.25/menu_ordering';
   currency = '₱';
-  domain = 'http://192.168.0.102/menu_ordering';
+  domain = 'http://menuordering.online/';
 
   constructor(public http: HttpClient) { }
 
   getProducts() {
     return new Promise(resolve => {
-      this.http.get(this.domain+'/getProducts').subscribe(data => {
+      this.http.get(this.domain+'apis/getProducts').subscribe(data => {
         resolve(data);
       }, err => {
         console.log(err);
@@ -27,7 +26,7 @@ export class RestProvider {
   
   getCategories() {
     return new Promise(resolve => {
-      this.http.get(this.domain+'/getCategories').subscribe(data => {
+      this.http.get(this.domain+'apis/getCategories').subscribe(data => {
         resolve(data);
       }, err => {
         console.log(err);
@@ -38,7 +37,7 @@ export class RestProvider {
   getProductsByCategory(categoryId: number) {
     const returnData = [];
     return new Promise(resolve => {
-      this.http.get(this.domain+'/getProductsByCategoryId/'+categoryId).subscribe(data => {
+      this.http.get(this.domain+'apis/getProductsByCategoryId/'+categoryId).subscribe(data => {
         Object.keys(data).forEach(key => {
           returnData.push({
             'category_id'       : data[key]['Product']['category_id'],
