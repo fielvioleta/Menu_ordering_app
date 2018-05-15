@@ -18,6 +18,7 @@ import { GlobalProvider } from '../providers/global/global';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Toast } from '@ionic-native/toast';
 import { FCM } from '@ionic-native/fcm';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { FCM } from '@ionic-native/fcm';
     BarcodeScanner,
     Toast,
     GlobalProvider,
-    FCM
+    FCM,
+    ScreenOrientation
   ]
 })
 export class AppModule {}
