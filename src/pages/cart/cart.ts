@@ -7,6 +7,7 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'cart.html',
 })
 export class CartPage {
+  orders;
 
   constructor(
     public navCtrl: NavController,
@@ -14,10 +15,23 @@ export class CartPage {
     public _globalProvider: GlobalProvider
   ) { 
     _globalProvider.orders.subscribe(data => {
-      console.log(data);
+      this.orders = data;
     });
   }
 
   ionViewDidLoad() { }
 
+  addQuantity(order: any) {
+    order.quantity++;
+  }
+
+  decreaseQuantity(order: any) {
+    if(order.quantity>1){
+      order.quantity--;
+    }
+  }
+  
+  removeItem(orderIndex: number) {
+    this._globalProvider.removeOrder(orderIndex);
+  }
 }

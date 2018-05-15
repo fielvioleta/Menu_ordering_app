@@ -5015,3 +5015,6 @@ a.button .icon:before, a.button.icon:before, a.button.icon-left:before, a.button
 .item.item-image {
   height: 115px;
 }
+.alert-wrapper .alert-message {
+  overflow-y: hidden !important
+}

@@ -24,12 +24,19 @@ export class MyApp {
     private fcm: FCM
   ) {
     platform.ready().then(() => {
-      this.fcm.getToken().then(token => {
-        alert(token);
-        // Your best bet is to here store the token on the user's profile on the
-        // Firebase database, so that when you want to send notifications to this 
-        // specific user you can do it from Cloud Functions.
-      });
+      // this.fcm.getToken().then(token => {
+      //   // alert(token);
+      // });
+      // this.fcm.subscribeToTopic('test');
+      // this.fcm.onNotification().subscribe(data => {
+      //   if(data.wasTapped){
+      //     alert( JSON.stringify(data) );
+      //   }else{
+      //     alert( JSON.stringify(data) );
+      //   }
+      // });
+
+      // this.restProvider.sendMessage();
     });
 
     this.restProvider.getCategories().then(data => {
