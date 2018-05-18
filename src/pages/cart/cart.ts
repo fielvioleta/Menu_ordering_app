@@ -53,8 +53,10 @@ export class CartPage {
   }
 
   getOrderedData() {
-    this._restProvider.getOrderedData(this._globalProvider.orderId.value).then(data =>{
-      this.ordered = data;
-    });
+    if(this._globalProvider.orderId.value !== null){
+      this._restProvider.getOrderedData(this._globalProvider.orderId.value).then(data =>{
+        this.ordered = data;
+      });
+    }
   }
 }

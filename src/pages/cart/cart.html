@@ -28,11 +28,13 @@
       </p>
       <button item-end class="button-clear-md" (click)="removeItem(index)" >Remove</button>
     </ion-item>
-    <button ion-button block class="button-block" (click)="saveOrders()">Place order</button>
+    <button ion-button block class="button-block" 
+      (click)="saveOrders()"
+      *ngIf="orders">Place order</button>
   </ion-list>
 
   <ion-list *ngIf="ordered?.length != 0">
-    <ion-item-divider color="light">Orders that have been placed</ion-item-divider>
+    <ion-item-divider *ngIf="ordered" color="light">Orders that have been placed</ion-item-divider>
     <ion-item *ngFor="let order of ordered;let index=index">
       <ion-thumbnail item-start>
         <img src="{{order.image_path}}">

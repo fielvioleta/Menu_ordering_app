@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 @Injectable()
 export class GlobalProvider {
   
-  orderId   = new BehaviorSubject(33);
+  orderId   = new BehaviorSubject(null);
   tableId   = new BehaviorSubject(1);
   orders    = new BehaviorSubject([]);
   ordered   = new BehaviorSubject([]);

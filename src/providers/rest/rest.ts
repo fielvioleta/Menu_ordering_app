@@ -49,7 +49,7 @@ export class RestProvider {
   getOrderedData(order_id: number) {
     const returnData = [];
     return new Promise(resolve => {
-      this.http.get('http://menu.local/apis/getOrderData/' + order_id).subscribe(data => {
+      this.http.get(this.domain+'/apis/getOrderData/' + order_id).subscribe(data => {
         Object.keys(data).forEach(key => {
           returnData.push({
             'order_id'          : data[key]['order_id'],
@@ -145,7 +145,7 @@ export class RestProvider {
               'table_id'  : this.tableId,
               'orders'    : ordersData,
             }
-            this.http.post('http://menu.local/apis/saveOrders', params, {headers: {'Content-Type': 'application/json'}}).subscribe(data => {
+            this.http.post(this.domain+'/apis/saveOrders', params, {headers: {'Content-Type': 'application/json'}}).subscribe(data => {
               this._globalProvider.orderId.next(data);
               this._globalProvider.moveOrderToOrdered();
             });
