@@ -5,17 +5,24 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 @Injectable()
 export class GlobalProvider {
   
+  tableId   = new BehaviorSubject(1);
   orders    = new BehaviorSubject([]);
 
   constructor(public http: HttpClient) { }
 
   putOrder(product, quantity) {
-    this.orders.next(this.orders.getValue().concat([
+    this.orders.getValue().forEach((order,index) =>{
+      if( order.product.id === product.id ) {
+        quantity = (+quantity + +order.quantity);
+        this.removeOrder(index);
+      }
+    });
+    this.orders.next(this.orders.getValue().concat(
       {
-        'quantity'  : quantity,
+        'quantity'  : +quantity,
         'product'   : product
       }
-    ]));
+    ));
   }
 
   removeOrder(orderIndex) {

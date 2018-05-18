@@ -9,6 +9,7 @@
 
 <ion-content>
   <ion-list *ngIf="orders">
+    <ion-item-divider color="light">Orders to be placed</ion-item-divider>
     <ion-item *ngFor="let order of orders;let index=index">
       <ion-thumbnail item-start>
         <img src="{{order.product.image_path}}">
@@ -26,5 +27,6 @@
       </p>
       <button item-end class="button-clear-md" (click)="removeItem(index)" >Remove</button>
     </ion-item>
+    <button ion-button block class="button-block" (click)="saveOrders()">Place order</button>
   </ion-list>
 </ion-content>

@@ -1,5 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { GlobalProvider } from '../global/global';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
+
+
 /*
   Generated class for the RestProvider provider.
 
@@ -8,10 +12,19 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class RestProvider {
-  currency = '₱';
-  domain = 'http://menuordering.online';
+  currency  = '₱';
+  domain    = 'http://menuordering.online';
+  tableId;
 
-  constructor(public http: HttpClient) { }
+  constructor(
+    public http: HttpClient,
+    public _globalProvider: GlobalProvider,
+    public _alerCtrl: AlertController
+  ) {
+    this._globalProvider.tableId.subscribe(id => {
+      this.tableId = id;
+    });
+  }
 
   getProducts() {
     return new Promise(resolve => {
@@ -84,5 +97,39 @@ export class RestProvider {
         alert(JSON.stringify(err));
       });
     });
+  }
+
+  saveOrders(orders: any) {
+    // let confirm = this._alerCtrl.create({
+    //   title: 'Confirm order',
+    //   message: 'Once you confirm you cannot cancel your order?' ,
+    //   buttons: [
+    //     {
+    //       text: 'Cancel', handler: () => { }
+    //     },{
+    //       text: 'Yes', handler: () => {
+    //         this._globalProvider.putOrder(product, quantity);
+    //       }
+    //     }
+    //   ]
+    // });
+    // confirm.present();
+    
+    const ordersData = [];
+    orders.forEach(order => {
+      ordersData.push({
+        'product_id'      : order.product.id,
+        'quantity'        : order.quantity,
+        'kitchen_status'  : 0,
+        'sub_total'       : (order.quantity * order.product.price),
+      });
+    });
+    const params = {
+      'table_id'  : this.tableId,
+      'orders'    : ordersData
+    }
+    // this.http.post('http://menu.local/apis/saveOrders', orders, {headers: {'Content-Type': 'application/json'}}).subscribe(data => {
+    //   console.log(data);
+    // });
   }
 }

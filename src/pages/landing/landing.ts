@@ -26,7 +26,7 @@ export class LandingPage {
     public restProvider: RestProvider,
     private screenOrientation: ScreenOrientation
   ) { 
-    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
+    // this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
     
     platform.registerBackButtonAction(() => {
       //sometimes the best thing you can do is not think, not wonder, not imagine, not obsess. 
