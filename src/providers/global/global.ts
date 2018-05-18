@@ -5,8 +5,10 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject'
 @Injectable()
 export class GlobalProvider {
   
+  orderId   = new BehaviorSubject(33);
   tableId   = new BehaviorSubject(1);
   orders    = new BehaviorSubject([]);
+  ordered   = new BehaviorSubject([]);
 
   constructor(public http: HttpClient) { }
 
@@ -31,5 +33,14 @@ export class GlobalProvider {
         if(index === orderIndex) { orderArr.splice(index, 1); }
     });
     this.orders.next(orderArr);
+  }
+
+  moveOrderToOrdered() {
+    // this.ordered.next(this.ordered.getValue().concat(this.orders.getValue()));
+    this.orders.next([]);
+  }
+
+  updateOrderId(orderId: any) {
+    this.orderId.next(orderId);
   }
 }

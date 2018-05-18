@@ -10,6 +10,7 @@ import { RestProvider } from '../../providers/rest/rest';
 })
 export class CartPage {
   orders;
+  ordered;
 
   constructor(
     public navCtrl: NavController,
@@ -17,8 +18,11 @@ export class CartPage {
     public _globalProvider: GlobalProvider,
     public _restProvider: RestProvider
   ) { 
-    _globalProvider.orders.subscribe(data => {
-      this.orders = data;
+    this.getOrdersData();
+    this.getOrderedData();
+
+    _globalProvider.orderId.subscribe(data =>{
+      this.getOrderedData();
     });
   }
 
@@ -40,5 +44,17 @@ export class CartPage {
 
   saveOrders() {
     this._restProvider.saveOrders(this.orders);
+  }
+
+  getOrdersData() {
+    this._globalProvider.orders.subscribe(data => {
+      this.orders = data;
+    });
+  }
+
+  getOrderedData() {
+    this._restProvider.getOrderedData(this._globalProvider.orderId.value).then(data =>{
+      this.ordered = data;
+    });
   }
 }

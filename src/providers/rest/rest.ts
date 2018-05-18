@@ -31,7 +31,7 @@ export class RestProvider {
       this.http.get(this.domain+'/apis/getProducts').subscribe(data => {
         resolve(data);
       }, err => {
-        alert(err);
+        console.log(err);
       });
     });
   }
@@ -41,7 +41,30 @@ export class RestProvider {
       this.http.get(this.domain+'/apis/getCategories').subscribe(data => {
         resolve(data);
       }, err => {
-        alert(err);
+        console.log(err);
+      });
+    });
+  }
+
+  getOrderedData(order_id: number) {
+    const returnData = [];
+    return new Promise(resolve => {
+      this.http.get('http://menu.local/apis/getOrderData/' + order_id).subscribe(data => {
+        Object.keys(data).forEach(key => {
+          returnData.push({
+            'order_id'          : data[key]['order_id'],
+            'quantity'          : data[key]['quantity'],
+            'kitchen_status'    : data[key]['kitchen_status'],
+            'image_path'        : data[key]['image_path'] ?  this.domain + data[key]['image_path'] : this.domain + '/images/default.jpg',
+            'sub_total'         : data[key]['sub_total'],
+            'name'              : data[key]['name'],
+            'price'             : data[key]['price'],
+            'currency'          : this.currency
+          });
+        });
+        resolve(returnData);
+      }, err => {
+        console.log(err);
       });
     });
   }
@@ -64,7 +87,7 @@ export class RestProvider {
         });
         resolve(returnData);
       }, err => {
-        alert(err);
+        console.log(err);
       });
     });
   }
@@ -100,36 +123,36 @@ export class RestProvider {
   }
 
   saveOrders(orders: any) {
-    // let confirm = this._alerCtrl.create({
-    //   title: 'Confirm order',
-    //   message: 'Once you confirm you cannot cancel your order?' ,
-    //   buttons: [
-    //     {
-    //       text: 'Cancel', handler: () => { }
-    //     },{
-    //       text: 'Yes', handler: () => {
-    //         this._globalProvider.putOrder(product, quantity);
-    //       }
-    //     }
-    //   ]
-    // });
-    // confirm.present();
-    
-    const ordersData = [];
-    orders.forEach(order => {
-      ordersData.push({
-        'product_id'      : order.product.id,
-        'quantity'        : order.quantity,
-        'kitchen_status'  : 0,
-        'sub_total'       : (order.quantity * order.product.price),
-      });
+    let confirm = this._alerCtrl.create({
+      title: 'Confirm order',
+      message: 'Once you confirm you cannot cancel your order?' ,
+      buttons: [
+        {
+          text: 'Cancel', handler: () => { }
+        },{
+          text: 'Yes', handler: () => {
+            const ordersData = [];
+            orders.forEach(order => {
+              ordersData.push({
+                'product_id'      : order.product.id,
+                'quantity'        : order.quantity,
+                'kitchen_status'  : 0,
+                'sub_total'       : (order.quantity * order.product.price),
+              });
+            });
+            const params = {
+              'order_id'  : this._globalProvider.orderId.value === null ? '' : this._globalProvider.orderId.value,
+              'table_id'  : this.tableId,
+              'orders'    : ordersData,
+            }
+            this.http.post('http://menu.local/apis/saveOrders', params, {headers: {'Content-Type': 'application/json'}}).subscribe(data => {
+              this._globalProvider.orderId.next(data);
+              this._globalProvider.moveOrderToOrdered();
+            });
+          }
+        }
+      ]
     });
-    const params = {
-      'table_id'  : this.tableId,
-      'orders'    : ordersData
-    }
-    // this.http.post('http://menu.local/apis/saveOrders', orders, {headers: {'Content-Type': 'application/json'}}).subscribe(data => {
-    //   console.log(data);
-    // });
+    confirm.present();
   }
 }

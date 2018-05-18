@@ -8,7 +8,8 @@
 
 
 <ion-content>
-  <ion-list *ngIf="orders">
+  
+  <ion-list *ngIf="orders.length != 0">
     <ion-item-divider color="light">Orders to be placed</ion-item-divider>
     <ion-item *ngFor="let order of orders;let index=index">
       <ion-thumbnail item-start>
@@ -29,4 +30,19 @@
     </ion-item>
     <button ion-button block class="button-block" (click)="saveOrders()">Place order</button>
   </ion-list>
+
+  <ion-list *ngIf="ordered?.length != 0">
+    <ion-item-divider color="light">Orders that have been placed</ion-item-divider>
+    <ion-item *ngFor="let order of ordered;let index=index">
+      <ion-thumbnail item-start>
+        <img src="{{order.image_path}}">
+      </ion-thumbnail>
+      <h2>{{order.name}}</h2>
+      <p>{{ order.currency + ' ' + order.price + ' x ' + order.quantity }}</p>
+      <p><strong>Total</strong>: {{order.currency + ' ' + (order.price * order.quantity)}}</p>
+      <img *ngIf="order.kitchen_status == 0" item-end src="assets/imgs/will-cook.png">
+      <img *ngIf="order.kitchen_status == 1" item-end src="assets/imgs/cooking.png">
+    </ion-item>
+  </ion-list>
+
 </ion-content>
