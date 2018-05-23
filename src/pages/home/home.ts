@@ -4,6 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Toast } from '@ionic-native/toast';
 import { LandingPage } from '../landing/landing';
+import { KitchenPage } from './../kitchen/kitchen';
 
 @Component({
   selector: 'page-home',
@@ -27,7 +28,8 @@ export class HomePage {
   }
 
   scan() {
-    this.navCtrl.push(LandingPage);
+    // this.navCtrl.push(LandingPage);
+    this.navCtrl.push(KitchenPage);
     // this.barcodeScanner.scan().then((barcodeData) => {
     //   if( barcodeData.text ) {
         

@@ -13,7 +13,8 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
 @Injectable()
 export class RestProvider {
   currency  = '₱';
-  domain    = 'http://menuordering.online';
+  // domain    = 'http://menuordering.online';
+  domain    = 'http://menu.local';
   tableId;
 
   constructor(
@@ -92,32 +93,65 @@ export class RestProvider {
     });
   }
 
-  sendMessage() {
-    const data = {
-      'notification': {
-        'title'                     : 'Notification title',
-        'body'                      : 'Notification body',
-        'sound'                     : 'default',
-        'click_action'              : 'FCM_PLUGIN_ACTIVITY',
-        'icon'                      : 'fcm_push_icon'
-      },
-      'data': {
-        'param1'                    : 'value',
-        'param2'                    : 'value'
-      },
-        'to'                        : '/topics/test',
-        'priority'                  : 'high',
-        'restricted_package_name'   : ''
-    }
-    
+  getOrders() {
+    const returnData = [];
     return new Promise(resolve => {
-      this.http.post('https://fcm.googleapis.com/fcm/send', JSON.stringify(data), {
-        headers: new HttpHeaders().set('Authorization', 'key=AIzaSyAh9l4xnckqsQYdeddybvEGWUzjbQ4ungA').set("Content-Type", "application/json"),
-      })
-      .subscribe(res => {
-        resolve(res);
-      }, (err) => {
-        alert(JSON.stringify(err));
+      this.http.get(this.domain+'/apis/getAllOrders').subscribe(data => {
+        Object.keys(data).forEach(key => {
+          returnData.push({
+            'kitchen_status'          : data[key]['kitchen_status'],
+            'product_image_path'      : data[key]['product_image_path'] ?  this.domain + data[key]['product_image_path'] : this.domain + '/images/default.jpg',
+            'product_name'            : data[key]['product_name'],
+            'quantity'                : data[key]['quantity'],
+            'table_id'                : data[key]['table_id'],
+            'order_detail_id'         : data[key]['order_detail_id'],
+          });
+        });
+        resolve(returnData);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+
+  getProductsForKitchen() {
+    return new Promise(resolve => {
+      this.http.get(this.domain+'/apis/getProductsForKitchen').subscribe(data => {
+        Object.keys(data).forEach(key => {
+          data[key].Product.forEach(element => {
+            element.image_path = element.image_path ?  this.domain + element.image_path : this.domain + '/images/default.jpg';
+          });
+        });
+        resolve(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+
+  updateKitchenStatus(orderDetailId: number) {
+    const params = {
+      'id'  : orderDetailId
+    }
+    return new Promise(resolve => {
+      this.http.post(this.domain+'/apis/updateKitchenStatus', params, {headers: {'Content-Type': 'application/json'}}).subscribe(data => {
+        resolve(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+  
+  updateAvailability(productId: number, availability: number) {
+    const params = {
+      'id'            : productId,
+      'availability'  : availability
+    }
+    return new Promise(resolve => {
+      this.http.post(this.domain+'/apis/updateAvailability', params, {headers: {'Content-Type': 'application/json'}}).subscribe(data => {
+        resolve(data);
+      }, err => {
+        console.log(err);
       });
     });
   }
@@ -154,5 +188,35 @@ export class RestProvider {
       ]
     });
     confirm.present();
+  }
+
+  sendMessage() {
+    const data = {
+      'notification': {
+        'title'                     : 'Notification title',
+        'body'                      : 'Notification body',
+        'sound'                     : 'default',
+        'click_action'              : 'FCM_PLUGIN_ACTIVITY',
+        'icon'                      : 'fcm_push_icon'
+      },
+      'data': {
+        'param1'                    : 'value',
+        'param2'                    : 'value'
+      },
+        'to'                        : '/topics/test',
+        'priority'                  : 'high',
+        'restricted_package_name'   : ''
+    }
+    
+    return new Promise(resolve => {
+      this.http.post('https://fcm.googleapis.com/fcm/send', JSON.stringify(data), {
+        headers: new HttpHeaders().set('Authorization', 'key=AIzaSyAh9l4xnckqsQYdeddybvEGWUzjbQ4ungA').set("Content-Type", "application/json"),
+      })
+      .subscribe(res => {
+        resolve(res);
+      }, (err) => {
+        alert(JSON.stringify(err));
+      });
+    });
   }
 }

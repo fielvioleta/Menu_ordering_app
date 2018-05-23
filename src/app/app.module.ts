@@ -10,6 +10,8 @@ import { LandingPage } from '../pages/landing/landing';
 import { ProductsPage } from './../pages/products/products';
 import { ProductPage } from './../pages/product/product';
 import { CartPage } from '../pages/cart/cart';
+import { CounterPage } from './../pages/counter/counter';
+import { KitchenPage } from '../pages/kitchen/kitchen';
 
 import { HttpClientModule } from '@angular/common/http';
 import { RestProvider } from '../providers/rest/rest';
@@ -27,7 +29,9 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
     LandingPage,
     ProductsPage,
     ProductPage,
-    CartPage
+    CartPage,
+    CounterPage,
+    KitchenPage
   ],
   imports: [
     BrowserModule,
@@ -41,7 +45,9 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
     LandingPage,
     ProductsPage,
     ProductPage,
-    CartPage
+    CartPage,
+    CounterPage,
+    KitchenPage
   ],
   providers: [
     StatusBar,

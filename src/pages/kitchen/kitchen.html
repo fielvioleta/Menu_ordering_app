@@ -1,9 +1,3 @@
-<!--
-  Generated template for the KitchenPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar>
@@ -13,6 +7,50 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+  <div>
+    <ion-segment [(ngModel)]="state">
+      <ion-segment-button value="orders">
+        Orders
+      </ion-segment-button>
+      <ion-segment-button value="products">
+        Foods
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  
+  <div [ngSwitch]="state">
+    <ion-list *ngSwitchCase="'orders'">
+      <ion-item *ngFor="let order of orders; let index = index">
+        <ion-thumbnail item-start>
+          <img src="{{order.product_image_path}}">
+        </ion-thumbnail>
+        <h2>{{order.product_name}}</h2>
+        <p>Quantity: {{order.quantity}}</p>
+        <p><strong>Tabe: {{order.table_id}}</strong></p>
+        <button item-end class="button-clear-md color-black" *ngIf="order.kitchen_status == 1">Accepted</button>
+        <button item-end class="button-clear-md" *ngIf="order.kitchen_status == 0" (click)="acceptOrder(order.order_detail_id, index)">Accept Order</button>
+      </ion-item>
+    </ion-list>
+  
+    <!-- <ion-list *ngSwitchCase="'products'">
 
+    </ion-list> -->
+    <div *ngSwitchCase="'products'">
+      <ion-list *ngFor="let product of products">    
+        <ion-list-header>{{product.Category.name}}</ion-list-header>
+    
+          <ion-item *ngFor="let productData of product.Product">
+            <ion-thumbnail item-start>
+              <img src="{{productData.image_path}}">
+            </ion-thumbnail>
+            <h2>{{productData.name}}</h2>
+            <button item-end class="button-clear-md" (click)="changeAvailability(productData.id, 1)" *ngIf="productData.is_not_available == 0">Available</button>
+            <button item-end class="button-clear-md" (click)="changeAvailability(productData.id, 0)" *ngIf="productData.is_not_available == 1">Not Available</button>
+          </ion-item>
+    
+      </ion-list>
+    </div>
+
+  </div>
 </ion-content>
