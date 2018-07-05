@@ -4,6 +4,8 @@ import { NavController, NavParams } from 'ionic-angular';
 import { GlobalProvider } from './../../providers/global/global';
 import { RestProvider } from '../../providers/rest/rest';
 
+import { FCM } from '@ionic-native/fcm';
+
 @Component({
   selector: 'page-cart',
   templateUrl: 'cart.html',
@@ -16,8 +18,16 @@ export class CartPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public _globalProvider: GlobalProvider,
-    public _restProvider: RestProvider
+    public _restProvider: RestProvider,
+    private fcm: FCM
   ) { 
+    this.fcm.subscribeToTopic('table'+this._globalProvider.tableId.getValue());
+    this.fcm.onNotification().subscribe(data => {
+      
+      this.getOrdersData();
+      this.getOrderedData();
+    });
+
     this.getOrdersData();
     this.getOrderedData();
 

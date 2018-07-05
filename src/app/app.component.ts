@@ -1,11 +1,13 @@
-import { ProductsPage } from './../pages/products/products';
-import { RestProvider } from './../providers/rest/rest';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, MenuController } from 'ionic-angular';
 
 import { HomePage } from '../pages/home/home';
 import { LandingPage } from './../pages/landing/landing';
 import { CartPage } from '../pages/cart/cart';
+import { ProductsPage } from './../pages/products/products';
+
+import { RestProvider } from './../providers/rest/rest';
+import { GlobalProvider } from '../providers/global/global';
 
 import { FCM } from '@ionic-native/fcm';
 
@@ -19,13 +21,14 @@ export class MyApp {
 
   constructor(
     platform: Platform,
-    public restProvider: RestProvider,
+    public _restProvider: RestProvider,
+    public _globalProvider: GlobalProvider,
     public menuCtrl: MenuController,
     private fcm: FCM
   ) {
     platform.ready().then(() => {
       // this.fcm.getToken().then(token => {
-      //   // alert(token);
+      //   alert(token);
       // });
       // this.fcm.subscribeToTopic('test');
       // this.fcm.onNotification().subscribe(data => {
@@ -35,11 +38,10 @@ export class MyApp {
       //     alert( JSON.stringify(data) );
       //   }
       // });
-
-      // this.restProvider.sendMessage();
+      // this._restProvider.sendMessage();
     });
 
-    this.restProvider.getCategories().then(data => {
+    this._restProvider.getCategories().then(data => {
       this.categories = data;
     });
   }
@@ -60,6 +62,16 @@ export class MyApp {
   navToCart() {
     this.nav.push(CartPage);
     this.menuCtrl.close();
+  }
+
+  requestBillOut() {
+    const orderId = this._globalProvider.orderId.value;
+    this._restProvider.sendRequestBill(orderId).then(data => {
+      if(data) {
+        this.nav.push(HomePage);
+        this.menuCtrl.close();
+      }
+    });
   }
 }
 

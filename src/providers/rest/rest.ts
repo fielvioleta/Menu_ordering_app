@@ -13,8 +13,8 @@ import { AlertController } from 'ionic-angular/components/alert/alert-controller
 @Injectable()
 export class RestProvider {
   currency  = '₱';
-  // domain    = 'http://menuordering.online';
-  domain    = 'http://menu.local';
+  domain    = 'http://menuordering.online';
+  // domain    = 'http://menu.local';
   tableId;
 
   constructor(
@@ -129,6 +129,35 @@ export class RestProvider {
     });
   }
 
+  sendRequestBill(orderId: number) {
+    return new Promise(resolve => {
+      let confirm = this._alerCtrl.create({
+        title: 'Bill out',
+        message: 'Requesting bill out will close application' ,
+        buttons: [
+          {
+            text: 'Cancel', handler: () => { }
+          },{
+            text: 'Yes', handler: () => {
+              const params = {
+                'order_id'  : orderId,
+                'table_id'  : this._globalProvider.tableId.getValue()
+              }
+              
+                this.http.post(this.domain+'/apis/sendRequestBill', params, {headers: {'Content-Type': 'application/json'}}).subscribe(data => {
+                  resolve(data);
+                }, err => {
+                  console.log(err);
+                });
+              
+            }
+          }
+        ]
+      });
+      confirm.present();
+    });
+  }
+
   updateKitchenStatus(orderDetailId: number) {
     const params = {
       'id'  : orderDetailId
@@ -190,24 +219,7 @@ export class RestProvider {
     confirm.present();
   }
 
-  sendMessage() {
-    const data = {
-      'notification': {
-        'title'                     : 'Notification title',
-        'body'                      : 'Notification body',
-        'sound'                     : 'default',
-        'click_action'              : 'FCM_PLUGIN_ACTIVITY',
-        'icon'                      : 'fcm_push_icon'
-      },
-      'data': {
-        'param1'                    : 'value',
-        'param2'                    : 'value'
-      },
-        'to'                        : '/topics/test',
-        'priority'                  : 'high',
-        'restricted_package_name'   : ''
-    }
-    
+  sendMessage(data) {
     return new Promise(resolve => {
       this.http.post('https://fcm.googleapis.com/fcm/send', JSON.stringify(data), {
         headers: new HttpHeaders().set('Authorization', 'key=AIzaSyAh9l4xnckqsQYdeddybvEGWUzjbQ4ungA').set("Content-Type", "application/json"),
@@ -218,5 +230,47 @@ export class RestProvider {
         alert(JSON.stringify(err));
       });
     });
+  }
+
+  sendMessageToKitchen() {
+    const data = {
+      'notification': {
+        'title'                     : 'New order received',
+        'body'                      : 'a new order has been placed by the customer',
+      },
+      'data': { },
+        'to'                        : '/topics/kitchen',
+        'priority'                  : 'high',
+        'restricted_package_name'   : ''
+    }
+    this.sendMessage(data);
+  }
+
+  sendMessageToCustomer() {
+    const data = {
+      'notification': {
+        'title'                     : 'Your order is in process',
+        'body'                      : 'your order is in process please wait for your order',
+      },
+      'data': { },
+        'to'                        : '/topics/table1',
+        'priority'                  : 'high',
+        'restricted_package_name'   : ''
+    }
+    this.sendMessage(data);
+  }
+
+  sendMessageToCounter() {
+    const data = {
+      'notification': {
+        'title'                     : 'Request for bill out',
+        'body'                      : 'customer is requesting for bill out',
+      },
+      'data': { },
+        'to'                        : '/topics/counter',
+        'priority'                  : 'high',
+        'restricted_package_name'   : ''
+    }
+    this.sendMessage(data);
   }
 }

@@ -5,6 +5,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Toast } from '@ionic-native/toast';
 import { LandingPage } from '../landing/landing';
 import { KitchenPage } from './../kitchen/kitchen';
+import { CounterPage } from './../counter/counter';
 
 @Component({
   selector: 'page-home',
@@ -28,18 +29,25 @@ export class HomePage {
   }
 
   scan() {
-    // this.navCtrl.push(LandingPage);
-    this.navCtrl.push(KitchenPage);
-    // this.barcodeScanner.scan().then((barcodeData) => {
-    //   if( barcodeData.text ) {
-        
-    //   }
-    // }, (err) => {
-    //   this.toast.show(err, '5000', 'center').subscribe(
-    //     toast => {
-    //       console.log(toast);
-    //     }
-    //   );
-    // });
+    this.barcodeScanner.scan().then((barcodeData) => {
+      const data = JSON.parse(barcodeData.text);
+      switch(data.for) {
+        case 'counter':
+          this.navCtrl.push(CounterPage);
+          break;
+        case 'kitchen':
+          this.navCtrl.push(KitchenPage);
+          break;
+        case 'customer':
+          this.navCtrl.push(LandingPage)
+          break;
+      }
+    }, (err) => {
+      this.toast.show(err, '5000', 'center').subscribe(
+        toast => {
+          console.log(toast);
+        }
+      );
+    });
   }
 }

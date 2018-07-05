@@ -27,7 +27,6 @@ export class LandingPage {
     private screenOrientation: ScreenOrientation
   ) { 
     // this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
-    
     platform.registerBackButtonAction(() => {
       //sometimes the best thing you can do is not think, not wonder, not imagine, not obsess. 
       //just breathe, and have faith that everything will work out for the best.

@@ -2,6 +2,8 @@ import { RestProvider } from './../../providers/rest/rest';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { FCM } from '@ionic-native/fcm';
+
 /**
  * Generated class for the KitchenPage page.
  *
@@ -22,8 +24,15 @@ export class KitchenPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public _restProvider: RestProvider
+    public _restProvider: RestProvider,
+    private fcm: FCM
   ) {
+    this.fcm.subscribeToTopic('kitchen');
+    this.fcm.onNotification().subscribe(data => {
+      this.getOrders();
+      this.getProducts();
+    });
+
     this.getOrders();
     this.getProducts();
   }
@@ -32,6 +41,7 @@ export class KitchenPage {
     this._restProvider.updateKitchenStatus(orderDetailId).then(data => {
       if(data) {
         this.getOrders();
+        this._restProvider.sendMessageToCustomer();
       }
     });
   }

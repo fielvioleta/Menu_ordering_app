@@ -31,19 +31,19 @@ export class ProductPage {
   addOrder(q) {
     const product   = this.product;
     const quantity    = q.value;
-    // let confirm = this._alerCtrl.create({
-    //   title: 'Add to orders?',
-    //   message: 'add ' + quantity + ' ' + product.name + ' ?' ,
-    //   buttons: [
-    //     {
-    //       text: 'Cancel', handler: () => { }
-    //     },{
-    //       text: 'Yes', handler: () => {
+    let confirm = this._alerCtrl.create({
+      title: 'Add to orders?',
+      message: 'add ' + quantity + ' ' + product.name + ' ?' ,
+      buttons: [
+        {
+          text: 'Cancel', handler: () => { }
+        },{
+          text: 'Yes', handler: () => {
             this._globalProvider.putOrder(product, quantity);
-    //       }
-    //     }
-    //   ]
-    // });
-    // confirm.present()
+          }
+        }
+      ]
+    });
+    confirm.present()
   }
 }
