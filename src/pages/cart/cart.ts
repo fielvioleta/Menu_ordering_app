@@ -53,7 +53,9 @@ export class CartPage {
   }
 
   saveOrders() {
-    this._restProvider.saveOrders(this.orders);
+    this._restProvider.saveOrders(this.orders).then(data => {
+      this._restProvider.sendMessageToKitchen();
+    });
   }
 
   getOrdersData() {

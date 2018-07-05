@@ -8,5 +8,20 @@
 
 
 <ion-content padding>
-
+  <div>
+    <ion-segment [(ngModel)]="state">
+      <ion-segment-button value="billOuts">
+        Bill Outs
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  
+  <div [ngSwitch]="state">
+    <ion-list *ngSwitchCase="'billOuts'">
+      <ion-item inset *ngFor="let data of billOuts; let index = index">
+        <h2>Table number: {{data.table_id}} </h2>
+        <p><strong>Total</strong>: {{data.total_amount}}</p>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>

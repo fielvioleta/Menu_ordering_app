@@ -68,6 +68,7 @@ export class MyApp {
     const orderId = this._globalProvider.orderId.value;
     this._restProvider.sendRequestBill(orderId).then(data => {
       if(data) {
+        this._restProvider.sendMessageToCounter();
         this.nav.push(HomePage);
         this.menuCtrl.close();
       }

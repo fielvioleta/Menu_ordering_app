@@ -93,6 +93,16 @@ export class RestProvider {
     });
   }
 
+  getBillOut() {
+    return new Promise(resolve => {
+      this.http.get(this.domain+'/apis/getBills').subscribe(data => {
+        resolve(data);
+      }, err => {
+        console.log(err);
+      });
+    });
+  }
+
   getOrders() {
     const returnData = [];
     return new Promise(resolve => {
@@ -186,37 +196,39 @@ export class RestProvider {
   }
 
   saveOrders(orders: any) {
-    let confirm = this._alerCtrl.create({
-      title: 'Confirm order',
-      message: 'Once you confirm you cannot cancel your order?' ,
-      buttons: [
-        {
-          text: 'Cancel', handler: () => { }
-        },{
-          text: 'Yes', handler: () => {
-            const ordersData = [];
-            orders.forEach(order => {
-              ordersData.push({
-                'product_id'      : order.product.id,
-                'quantity'        : order.quantity,
-                'kitchen_status'  : 0,
-                'sub_total'       : (order.quantity * order.product.price),
+    return new Promise(resolve => {
+      let confirm = this._alerCtrl.create({
+        title: 'Confirm order',
+        message: 'Once you confirm you cannot cancel your order?' ,
+        buttons: [
+          {
+            text: 'Cancel', handler: () => { }
+          },{
+            text: 'Yes', handler: () => {
+              const ordersData = [];
+              orders.forEach(order => {
+                ordersData.push({
+                  'product_id'      : order.product.id,
+                  'quantity'        : order.quantity,
+                  'kitchen_status'  : 0,
+                  'sub_total'       : (order.quantity * order.product.price),
+                });
               });
-            });
-            const params = {
-              'order_id'  : this._globalProvider.orderId.value === null ? '' : this._globalProvider.orderId.value,
-              'table_id'  : this.tableId,
-              'orders'    : ordersData,
+              const params = {
+                'order_id'  : this._globalProvider.orderId.value === null ? '' : this._globalProvider.orderId.value,
+                'table_id'  : this.tableId,
+                'orders'    : ordersData,
+              }
+              this.http.post(this.domain+'/apis/saveOrders', params, {headers: {'Content-Type': 'application/json'}}).subscribe(data => {
+                this._globalProvider.orderId.next(data);
+                this._globalProvider.moveOrderToOrdered();
+              });
             }
-            this.http.post(this.domain+'/apis/saveOrders', params, {headers: {'Content-Type': 'application/json'}}).subscribe(data => {
-              this._globalProvider.orderId.next(data);
-              this._globalProvider.moveOrderToOrdered();
-            });
           }
-        }
-      ]
+        ]
+      });
+      confirm.present();
     });
-    confirm.present();
   }
 
   sendMessage(data) {
