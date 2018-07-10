@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { GlobalProvider } from './../../providers/global/global';
@@ -19,13 +19,15 @@ export class CartPage {
     public navParams: NavParams,
     public _globalProvider: GlobalProvider,
     public _restProvider: RestProvider,
-    private fcm: FCM
+    private fcm: FCM,
+    private _ngZone: NgZone,
   ) { 
     this.fcm.subscribeToTopic('table'+this._globalProvider.tableId.getValue());
     this.fcm.onNotification().subscribe(data => {
-      
-      this.getOrdersData();
-      this.getOrderedData();
+      this._ngZone.run(()=> {
+        this.getOrdersData();
+        this.getOrderedData();
+      });
     });
 
     this.getOrdersData();
@@ -37,7 +39,7 @@ export class CartPage {
   }
 
   ionViewDidLoad() { }
-
+  
   addQuantity(order: any) {
     order.quantity++;
   }

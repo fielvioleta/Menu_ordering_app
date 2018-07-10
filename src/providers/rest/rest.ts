@@ -32,7 +32,7 @@ export class RestProvider {
       this.http.get(this.domain+'/apis/getProducts').subscribe(data => {
         resolve(data);
       }, err => {
-        console.log(err);
+        alert(JSON.stringify(err));
       });
     });
   }
@@ -42,7 +42,7 @@ export class RestProvider {
       this.http.get(this.domain+'/apis/getCategories').subscribe(data => {
         resolve(data);
       }, err => {
-        console.log(err);
+        alert(JSON.stringify(err));
       });
     });
   }
@@ -65,7 +65,7 @@ export class RestProvider {
         });
         resolve(returnData);
       }, err => {
-        console.log(err);
+        alert(JSON.stringify(err));
       });
     });
   }
@@ -88,7 +88,7 @@ export class RestProvider {
         });
         resolve(returnData);
       }, err => {
-        console.log(err);
+        alert(JSON.stringify(err));
       });
     });
   }
@@ -98,7 +98,7 @@ export class RestProvider {
       this.http.get(this.domain+'/apis/getBills').subscribe(data => {
         resolve(data);
       }, err => {
-        console.log(err);
+        alert(JSON.stringify(err));
       });
     });
   }
@@ -119,7 +119,7 @@ export class RestProvider {
         });
         resolve(returnData);
       }, err => {
-        console.log(err);
+        alert(JSON.stringify(err));
       });
     });
   }
@@ -134,7 +134,7 @@ export class RestProvider {
         });
         resolve(data);
       }, err => {
-        console.log(err);
+        alert(JSON.stringify(err));
       });
     });
   }
@@ -157,9 +157,8 @@ export class RestProvider {
                 this.http.post(this.domain+'/apis/sendRequestBill', params, {headers: {'Content-Type': 'application/json'}}).subscribe(data => {
                   resolve(data);
                 }, err => {
-                  console.log(err);
+                  alert(JSON.stringify(err));
                 });
-              
             }
           }
         ]
@@ -176,7 +175,7 @@ export class RestProvider {
       this.http.post(this.domain+'/apis/updateKitchenStatus', params, {headers: {'Content-Type': 'application/json'}}).subscribe(data => {
         resolve(data);
       }, err => {
-        console.log(err);
+        alert(JSON.stringify(err));
       });
     });
   }
@@ -190,7 +189,7 @@ export class RestProvider {
       this.http.post(this.domain+'/apis/updateAvailability', params, {headers: {'Content-Type': 'application/json'}}).subscribe(data => {
         resolve(data);
       }, err => {
-        console.log(err);
+        alert(JSON.stringify(err));
       });
     });
   }
@@ -222,6 +221,9 @@ export class RestProvider {
               this.http.post(this.domain+'/apis/saveOrders', params, {headers: {'Content-Type': 'application/json'}}).subscribe(data => {
                 this._globalProvider.orderId.next(data);
                 this._globalProvider.moveOrderToOrdered();
+                resolve(data);
+              }, err => {
+                alert(JSON.stringify(err));
               });
             }
           }

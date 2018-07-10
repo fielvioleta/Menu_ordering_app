@@ -1,6 +1,6 @@
 import { RestProvider } from './../../providers/rest/rest';
 import { FCM } from '@ionic-native/fcm';
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
@@ -24,11 +24,14 @@ export class CounterPage {
     public navParams: NavParams,
     private fcm: FCM,
     public _restProvider: RestProvider,
+    private _ngZone: NgZone,
   ) {
-    this.fcm.subscribeToTopic('counter');
-    this.fcm.onNotification().subscribe(data => {
-      this.getBillOut();
-    });
+    // this.fcm.subscribeToTopic('counter');
+    // this.fcm.onNotification().subscribe(data => {
+    //   this._ngZone.run(()=> {
+    //     this.getBillOut();
+    //   });
+    // });
 
     this.getBillOut();
   }

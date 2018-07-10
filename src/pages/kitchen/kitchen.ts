@@ -1,5 +1,5 @@
 import { RestProvider } from './../../providers/rest/rest';
-import { Component } from '@angular/core';
+import { Component, NgZone } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { FCM } from '@ionic-native/fcm';
@@ -25,13 +25,16 @@ export class KitchenPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public _restProvider: RestProvider,
-    private fcm: FCM
+    private fcm: FCM,
+    private _ngZone: NgZone,
   ) {
-    this.fcm.subscribeToTopic('kitchen');
-    this.fcm.onNotification().subscribe(data => {
-      this.getOrders();
-      this.getProducts();
-    });
+    // this.fcm.subscribeToTopic('kitchen');
+    // this.fcm.onNotification().subscribe(data => {
+    //   this._ngZone.run(()=> {
+    //     this.getOrders();
+    //     this.getProducts();
+    //   });
+    // });
 
     this.getOrders();
     this.getProducts();

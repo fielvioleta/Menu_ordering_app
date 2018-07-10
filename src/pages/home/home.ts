@@ -29,25 +29,26 @@ export class HomePage {
   }
 
   scan() {
-    this.barcodeScanner.scan().then((barcodeData) => {
-      const data = JSON.parse(barcodeData.text);
-      switch(data.for) {
-        case 'counter':
-          this.navCtrl.push(CounterPage);
-          break;
-        case 'kitchen':
-          this.navCtrl.push(KitchenPage);
-          break;
-        case 'customer':
-          this.navCtrl.push(LandingPage)
-          break;
-      }
-    }, (err) => {
-      this.toast.show(err, '5000', 'center').subscribe(
-        toast => {
-          console.log(toast);
-        }
-      );
-    });
+    this.navCtrl.push(LandingPage);
+    // this.barcodeScanner.scan().then((barcodeData) => {
+    //   const data = JSON.parse(barcodeData.text);
+    //   switch(data.for) {
+    //     case 'counter':
+    //       this.navCtrl.push(CounterPage);
+    //       break;
+    //     case 'kitchen':
+    //       this.navCtrl.push(KitchenPage);
+    //       break;
+    //     case 'customer':
+    //       this.navCtrl.push(LandingPage)
+    //       break;
+    //   }
+    // }, (err) => {
+    //   this.toast.show(err, '5000', 'center').subscribe(
+    //     toast => {
+    //       console.log(toast);
+    //     }
+    //   );
+    // });
   }
 }
