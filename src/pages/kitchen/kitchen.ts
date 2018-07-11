@@ -40,8 +40,8 @@ export class KitchenPage {
     this.getProducts();
   }
   
-  acceptOrder(orderDetailId: number, index: number) {
-    this._restProvider.updateKitchenStatus(orderDetailId).then(data => {
+  acceptOrder(orderDetailId: number, status: number) {
+    this._restProvider.updateKitchenStatus(orderDetailId, status).then(data => {
       if(data) {
         this.getOrders();
         this._restProvider.sendMessageToCustomer();

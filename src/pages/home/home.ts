@@ -33,40 +33,41 @@ export class HomePage {
   }
 
   crewLogin() {
-    const prompt = this.alertCtrl.create({
-      title: 'Login',
-      message: "Please enter username and password for kitchen or counter",
-      inputs: [
-        {
-          name: 'username',
-          placeholder: 'Username'
-        },
-        {
-          name: 'password',
-          placeholder: 'Password',
-          type: 'password'
-        },
-      ],
-      buttons: [
-        {
-          text: 'Cancel',
-          handler: () => { }
-        },
-        {
-          text: 'Login',
-          handler: data => {
-            this._rest.crewLogin(data.username, data.password).then(res => {
-              if ( res['user_type'] ==3 ) { // kitchen
-                this.navCtrl.push(KitchenPage);
-              } else if( res['user_type'] ==2) { //counter
-                this.navCtrl.push(CounterPage);
-              }
-            });
-          }
-        }
-      ]
-    });
-    prompt.present();
+    this.navCtrl.push(KitchenPage);
+    // const prompt = this.alertCtrl.create({
+    //   title: 'Login',
+    //   message: "Please enter username and password for kitchen or counter",
+    //   inputs: [
+    //     {
+    //       name: 'username',
+    //       placeholder: 'Username'
+    //     },
+    //     {
+    //       name: 'password',
+    //       placeholder: 'Password',
+    //       type: 'password'
+    //     },
+    //   ],
+    //   buttons: [
+    //     {
+    //       text: 'Cancel',
+    //       handler: () => { }
+    //     },
+    //     {
+    //       text: 'Login',
+    //       handler: data => {
+    //         this._rest.crewLogin(data.username, data.password).then(res => {
+    //           if ( res['user_type'] ==3 ) { // kitchen
+    //             this.navCtrl.push(KitchenPage);
+    //           } else if( res['user_type'] ==2) { //counter
+    //             this.navCtrl.push(CounterPage);
+    //           }
+    //         });
+    //       }
+    //     }
+    //   ]
+    // });
+    // prompt.present();
   }
 
   scan() {

@@ -28,18 +28,19 @@
         <h2>{{order.product_name}}</h2>
         <p>Quantity: {{order.quantity}}</p>
         <p><strong>Tabe: {{order.table_id}}</strong></p>
-        <button item-end class="button-clear-md color-black" *ngIf="order.kitchen_status == 1">Accepted</button>
-        <button item-end class="button-clear-md" *ngIf="order.kitchen_status == 0" (click)="acceptOrder(order.order_detail_id, index)">Accept Order</button>
+        <p><strong >Current Status: 
+            <span class="color-red" *ngIf="order.kitchen_status == 0">Pending</span>
+            <span class="color-red" *ngIf="order.kitchen_status == 1">Accepted</span>
+            <span class="color-green" *ngIf="order.kitchen_status == 2">Delivered</span>
+        </strong></p>
+        <button item-end class="button-clear-md" *ngIf="order.kitchen_status == 0" (click)="acceptOrder(order.order_detail_id, 1)">Accept Order</button>
+        <button item-end class="button-clear-md" *ngIf="order.kitchen_status == 1" (click)="acceptOrder(order.order_detail_id, 2)">Delivered</button>
       </ion-item>
     </ion-list>
   
-    <!-- <ion-list *ngSwitchCase="'products'">
-
-    </ion-list> -->
     <div *ngSwitchCase="'products'">
       <ion-list *ngFor="let product of products">    
         <ion-list-header>{{product.Category.name}}</ion-list-header>
-    
           <ion-item *ngFor="let productData of product.Product">
             <ion-thumbnail item-start>
               <img src="{{productData.image_path}}">
@@ -48,7 +49,6 @@
             <button item-end class="button-clear-md" (click)="changeAvailability(productData.id, 1)" *ngIf="productData.is_not_available == 0">Available</button>
             <button item-end class="button-clear-md" (click)="changeAvailability(productData.id, 0)" *ngIf="productData.is_not_available == 1">Not Available</button>
           </ion-item>
-    
       </ion-list>
     </div>
 

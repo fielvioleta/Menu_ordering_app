@@ -182,9 +182,10 @@ export class RestProvider {
     });
   }
 
-  updateKitchenStatus(orderDetailId: number) {
+  updateKitchenStatus(orderDetailId: number, status: number) {
     const params = {
-      'id'  : orderDetailId
+      'id'  : orderDetailId,
+      'status'  : status,
     }
     return new Promise(resolve => {
       this.http.post(this.domain+'/apis/updateKitchenStatus', params, {headers: {'Content-Type': 'application/json'}}).subscribe(data => {

@@ -5018,3 +5018,8 @@ a.button .icon:before, a.button.icon:before, a.button.icon-left:before, a.button
 .alert-wrapper .alert-message {
   overflow-y: hidden !important
 }
+
+.item-ios ion-thumbnail ion-img, .item-ios ion-thumbnail img {
+  width: 250px !important;
+  height: unset !important;
+}
