@@ -7,8 +7,11 @@
     <ion-slide *ngFor="let image of images" [style.background-image]="image.imagePath"><div class="overlay"></div></ion-slide>
   </ion-slides>
   <div layout-padding class="buttons-field">
+    <button ion-button class="button button-block button-assertive" (click)="crewLogin()">
+      Crew Login
+    </button>
     <button ion-button class="button button-block button-positive" (click)="scan()">
-      Dine-in
+      Customer Dine-in
     </button>
   </div>
 </ion-content>

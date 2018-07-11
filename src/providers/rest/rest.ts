@@ -27,6 +27,21 @@ export class RestProvider {
     });
   }
 
+  crewLogin (username, password) {
+    return new Promise(resolve => {
+      const params = {
+        'username'  : username,
+        'password'  : password
+      }
+      
+      this.http.post(this.domain+'/apis/checkAccount', params, {headers: {'Content-Type': 'application/json'}}).subscribe(data => {
+        resolve(data);
+      }, err => {
+        alert(JSON.stringify(err));
+      });
+    });
+  }
+
   getProducts() {
     return new Promise(resolve => {
       this.http.get(this.domain+'/apis/getProducts').subscribe(data => {
