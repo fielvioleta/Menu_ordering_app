@@ -33,64 +33,54 @@ export class HomePage {
   }
 
   crewLogin() {
-    this.navCtrl.push(KitchenPage);
-    // const prompt = this.alertCtrl.create({
-    //   title: 'Login',
-    //   message: "Please enter username and password for kitchen or counter",
-    //   inputs: [
-    //     {
-    //       name: 'username',
-    //       placeholder: 'Username'
-    //     },
-    //     {
-    //       name: 'password',
-    //       placeholder: 'Password',
-    //       type: 'password'
-    //     },
-    //   ],
-    //   buttons: [
-    //     {
-    //       text: 'Cancel',
-    //       handler: () => { }
-    //     },
-    //     {
-    //       text: 'Login',
-    //       handler: data => {
-    //         this._rest.crewLogin(data.username, data.password).then(res => {
-    //           if ( res['user_type'] ==3 ) { // kitchen
-    //             this.navCtrl.push(KitchenPage);
-    //           } else if( res['user_type'] ==2) { //counter
-    //             this.navCtrl.push(CounterPage);
-    //           }
-    //         });
-    //       }
-    //     }
-    //   ]
-    // });
-    // prompt.present();
+    const prompt = this.alertCtrl.create({
+      title: 'Login',
+      message: "Please enter username and password for kitchen or counter",
+      inputs: [
+        {
+          name: 'username',
+          placeholder: 'Username'
+        },
+        {
+          name: 'password',
+          placeholder: 'Password',
+          type: 'password'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: () => { }
+        },
+        {
+          text: 'Login',
+          handler: data => {
+            this._rest.crewLogin(data.username, data.password).then(res => {
+              if(!res) {
+                alert( 'Username and password is incorrect' );
+              } else if ( res['user_type'] == 3 ) { // kitchen
+                this.navCtrl.push(KitchenPage);
+              } else if( res['user_type'] == 2) { //counter
+                this.navCtrl.push(CounterPage);
+              }
+            });
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 
   scan() {
-    this.navCtrl.push(LandingPage);
-    // this.barcodeScanner.scan().then((barcodeData) => {
-    //   const data = JSON.parse(barcodeData.text);
-    //   switch(data.for) {
-    //     case 'counter':
-    //       this.navCtrl.push(CounterPage);
-    //       break;
-    //     case 'kitchen':
-    //       this.navCtrl.push(KitchenPage);
-    //       break;
-    //     case 'customer':
-    //       this.navCtrl.push(LandingPage)
-    //       break;
-    //   }
-    // }, (err) => {
-    //   this.toast.show(err, '5000', 'center').subscribe(
-    //     toast => {
-    //       console.log(toast);
-    //     }
-    //   );
-    // });
+    this.barcodeScanner.scan().then((barcodeData) => {
+      // need to store tableid
+      this.navCtrl.push(LandingPage);
+    }, (err) => {
+      this.toast.show(err, '5000', 'center').subscribe(
+        toast => {
+          console.log(toast);
+        }
+      );
+    });
   }
 }

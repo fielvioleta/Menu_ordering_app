@@ -27,7 +27,7 @@
             <span>{{category.Category.name}}</span>
         </ion-item>
        
-        <ion-item ng-click="vm.logout()" class="item-icon-left">
+        <ion-item (click)="logout()" class="item-icon-left">
             <ion-icon name="exit"></ion-icon>
             <span>Logout</span>
         </ion-item>

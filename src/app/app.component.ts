@@ -1,3 +1,4 @@
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform, MenuController } from 'ionic-angular';
 
@@ -24,7 +25,8 @@ export class MyApp {
     public _restProvider: RestProvider,
     public _globalProvider: GlobalProvider,
     public menuCtrl: MenuController,
-    private fcm: FCM
+    private fcm: FCM,
+    private screenOrientation: ScreenOrientation
   ) {
     platform.ready().then(() => {
       // this.fcm.getToken().then(token => {
@@ -73,6 +75,17 @@ export class MyApp {
         this.menuCtrl.close();
       }
     });
+  }
+
+  logout() {
+    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+    this.fcm.unsubscribeFromTopic('table'+this._globalProvider.tableId.value);
+    this._globalProvider.ordered.next([]);
+    this._globalProvider.orders.next([]);
+    this._globalProvider.orderId.next(null);
+    this._globalProvider.tableId.next(null);
+    this.nav.push(HomePage);
+    this.menuCtrl.close();
   }
 }
 
