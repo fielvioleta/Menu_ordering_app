@@ -28,20 +28,7 @@ export class MyApp {
     private fcm: FCM,
     private screenOrientation: ScreenOrientation
   ) {
-    platform.ready().then(() => {
-      // this.fcm.getToken().then(token => {
-      //   alert(token);
-      // });
-      // this.fcm.subscribeToTopic('test');
-      // this.fcm.onNotification().subscribe(data => {
-      //   if(data.wasTapped){
-      //     alert( JSON.stringify(data) );
-      //   }else{
-      //     alert( JSON.stringify(data) );
-      //   }
-      // });
-      // this._restProvider.sendMessage();
-    });
+    platform.ready().then(() => { });
 
     this._restProvider.getCategories().then(data => {
       this.categories = data;
@@ -70,6 +57,7 @@ export class MyApp {
     const orderId = this._globalProvider.orderId.value;
     this._restProvider.sendRequestBill(orderId).then(data => {
       if(data) {
+        this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
         this._restProvider.sendMessageToCounter();
         this.nav.push(HomePage);
         this.menuCtrl.close();
