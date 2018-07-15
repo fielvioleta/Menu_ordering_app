@@ -43,6 +43,7 @@
       <p><strong>Total</strong>: {{order.currency + ' ' + (order.price * order.quantity)}}</p>
       <img *ngIf="order.kitchen_status == 0" item-end src="assets/imgs/will-cook.png">
       <img *ngIf="order.kitchen_status == 1" item-end src="assets/imgs/cooking.png">
+      <img *ngIf="order.kitchen_status == 2" item-end src="assets/imgs/checked.png">
     </ion-item>
   </ion-list>
 
