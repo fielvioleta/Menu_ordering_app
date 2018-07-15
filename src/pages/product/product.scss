@@ -3,12 +3,10 @@ page-product {
         height: unset;
     }
     .image-container {
-        max-height: 239px;
+        height: 580px;
         width: 100%;
-
-        img {
-            min-width: 100%;
-            max-height: 100%;
-        }
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
     }
 }

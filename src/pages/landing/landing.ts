@@ -36,7 +36,7 @@ export class LandingPage {
   }
 
   ionViewDidLoad() {
-    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
+    // this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
   }
 
   navToProductsBycateg(id: number, name: string) {

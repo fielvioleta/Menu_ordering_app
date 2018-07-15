@@ -1,3 +1,4 @@
+import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { GlobalProvider } from '../global/global';
@@ -20,7 +21,8 @@ export class RestProvider {
   constructor(
     public http: HttpClient,
     public _globalProvider: GlobalProvider,
-    public _alerCtrl: AlertController
+    public _alerCtrl: AlertController,
+    private _sanitizer: DomSanitizer,
   ) {
     this._globalProvider.tableId.subscribe(id => {
       this.tableId = id;
@@ -55,6 +57,11 @@ export class RestProvider {
   getCategories() {
     return new Promise(resolve => {
       this.http.get(this.domain+'/apis/getCategories').subscribe(data => {
+        Object.keys(data).forEach(key => {
+          data[key]['Category']['image_path'] = data[key]['Category']['image_path'] ?
+            this._sanitizer.bypassSecurityTrustStyle(`url(${this.domain+data[key]['Category']['image_path']})`) :
+            this._sanitizer.bypassSecurityTrustStyle(`url(${this.domain+'/images/default.jpg'})`)
+        });
         resolve(data);
       }, err => {
         alert(JSON.stringify(err));
@@ -94,7 +101,12 @@ export class RestProvider {
             'category_id'       : data[key]['Product']['category_id'],
             'description'       : data[key]['Product']['description'],
             'id'                : data[key]['Product']['id'],
-            'image_path'        : data[key]['Product']['image_path'] ?  this.domain + data[key]['Product']['image_path'] : this.domain + '/images/default.jpg',
+            'image_path'        : data[key]['Product']['image_path'] ?  
+              this._sanitizer.bypassSecurityTrustStyle(`url(${this.domain + data[key]['Product']['image_path']})`) :
+              this._sanitizer.bypassSecurityTrustStyle(`url(${this.domain + '/images/default.jpg'})`) ,
+            'image_path_raw'    : data[key]['Product']['image_path'] ?  
+              this.domain + data[key]['Product']['image_path']:
+              this.domain + '/images/default.jpg' ,
             'is_not_available'  : data[key]['Product']['is_not_available'],
             'name'              : data[key]['Product']['name'],
             'price'             : data[key]['Product']['price'],

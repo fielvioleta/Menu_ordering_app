@@ -5008,13 +5008,7 @@ a.button .icon:before, a.button.icon:before, a.button.icon-left:before, a.button
   font-size: 16px;
 }
 
-.product-list-image {
-  max-height:129px
-}
 
-.item.item-image {
-  height: 115px;
-}
 .alert-wrapper .alert-message {
   overflow-y: hidden !important
 }
@@ -5022,4 +5016,16 @@ a.button .icon:before, a.button.icon:before, a.button.icon-left:before, a.button
 .item-ios ion-thumbnail ion-img, .item-ios ion-thumbnail img {
   width: 250px !important;
   height: unset !important;
+}
+
+.img-container {
+  width:  100%;
+  height: 230px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.products-list .item {
+  padding: 8px !important;
 }

@@ -22,13 +22,13 @@ export class CartPage {
     private fcm: FCM,
     private _ngZone: NgZone,
   ) { 
-    this.fcm.subscribeToTopic('table'+this._globalProvider.tableId.getValue());
-    this.fcm.onNotification().subscribe(data => {
-      this._ngZone.run(()=> {
-        this.getOrdersData();
-        this.getOrderedData();
-      });
-    });
+    // this.fcm.subscribeToTopic('table'+this._globalProvider.tableId.getValue());
+    // this.fcm.onNotification().subscribe(data => {
+    //   this._ngZone.run(()=> {
+    //     this.getOrdersData();
+    //     this.getOrderedData();
+    //   });
+    // });
 
     this.getOrdersData();
     this.getOrderedData();

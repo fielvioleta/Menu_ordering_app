@@ -72,15 +72,16 @@ export class HomePage {
   }
 
   scan() {
-    this.barcodeScanner.scan().then((barcodeData) => {
-      // need to store tableid
-      this.navCtrl.push(LandingPage);
-    }, (err) => {
-      this.toast.show(err, '5000', 'center').subscribe(
-        toast => {
-          console.log(toast);
-        }
-      );
-    });
+    this.navCtrl.push(LandingPage);
+    // this.barcodeScanner.scan().then((barcodeData) => {
+    //   // need to store tableid
+    //   this.navCtrl.push(LandingPage);
+    // }, (err) => {
+    //   this.toast.show(err, '5000', 'center').subscribe(
+    //     toast => {
+    //       console.log(toast);
+    //     }
+    //   );
+    // });
   }
 }

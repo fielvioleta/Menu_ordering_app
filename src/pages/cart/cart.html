@@ -12,7 +12,7 @@
     <ion-item-divider color="light">Orders to be placed</ion-item-divider>
     <ion-item *ngFor="let order of orders;let index=index">
       <ion-thumbnail item-start>
-        <img src="{{order.product.image_path}}">
+        <img src="{{order.product.image_path_raw}}">
       </ion-thumbnail>
       <h2>{{order.product.name}}</h2>
       <p>{{ order.product.currency + ' ' + order.product.price + ' x ' + order.quantity }}</p>

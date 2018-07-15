@@ -16,7 +16,7 @@
 
       <div class="card col" (click)="navToProduct(product)">
         <div class="item item-image">
-          <img src="{{product.image_path}}" class="product-list-image">
+          <div class="img-container" [style.background-image]="product.image_path"></div>
         </div>
   
         <a class="item">
@@ -30,7 +30,7 @@
         (click)="navToProduct(products[index+1])"
         >
         <div class="item item-image">
-          <img src="{{products[index+1]?.image_path}}" class="product-list-image">
+            <div class="img-container" [style.background-image]="products[index+1].image_path"></div>
         </div>
 
         <a class="item">

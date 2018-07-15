@@ -16,7 +16,7 @@
       <div class="card col home" 
         (click)="navToProductsBycateg(category.Category.id, category.Category.name)">
           <a class="item item-text-wrap">
-            <h1><ion-icon name="restaurant"></ion-icon></h1>
+            <div class="img-container" [style.background-image]="category.Category.image_path"></div>
             <h2>{{category.Category.name}}</h2>
           </a>
       </div>
@@ -25,7 +25,7 @@
         *ngIf="categories[index+1]"
         (click)="navToProductsBycateg(categories[index+1].Category.id, categories[index+1].Category.name)">
           <a class="item item-text-wrap">
-            <h1><ion-icon name="restaurant"></ion-icon></h1>
+            <div class="img-container" [style.background-image]="categories[index+1].Category.image_path"></div>
             <h2>{{categories[index+1].Category.name}}</h2>
           </a>
       </div>

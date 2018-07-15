@@ -13,9 +13,7 @@
 
   <ion-slides >
     <ion-slide>
-      <div class="image-container">
-        <img src="{{product.image_path}}">
-      </div>
+      <div class="image-container" [style.background-image]="product.image_path"></div>
     </ion-slide>
   </ion-slides>
 
