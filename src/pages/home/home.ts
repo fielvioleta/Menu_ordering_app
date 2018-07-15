@@ -1,3 +1,4 @@
+import { GlobalProvider } from './../../providers/global/global';
 import { Component } from '@angular/core';
 import { NavController, AlertController, MenuController } from 'ionic-angular';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -23,7 +24,8 @@ export class HomePage {
     public _alertCtrl: AlertController,
     public _sanitizer: DomSanitizer,
     public _rest: RestProvider,
-    public _menu: MenuController
+    public _menu: MenuController,
+    public _global: GlobalProvider
   ) {
     this._menu.enable(false, 'myMenu');
     this.images.push(
@@ -75,8 +77,10 @@ export class HomePage {
 
   scan() {
     this.barcodeScanner.scan().then((barcodeData) => {
-      // need to store tableid
-      this._navCtrl.push(LandingPage);
+      if (barcodeData.text) {
+        this._global.tableId.next(+barcodeData.text);
+        this._navCtrl.push(LandingPage);
+      }
     }, (err) => {
       this.toast.show(err, '5000', 'center').subscribe(
         toast => {

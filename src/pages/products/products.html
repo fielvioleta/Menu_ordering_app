@@ -30,7 +30,7 @@
         (click)="navToProduct(products[index+1])"
         >
         <div class="item item-image">
-            <div class="img-container" [style.background-image]="products[index+1].image_path"></div>
+            <div class="img-container" [style.background-image]="products[index+1]?.image_path"></div>
         </div>
 
         <a class="item">
