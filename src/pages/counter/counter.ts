@@ -58,9 +58,18 @@ export class CounterPage {
      this.navCtrl.pop();
     }
   }
+
   getBillOut() {
     this._restProvider.getBillOut().then(data => {
       this.billOuts = data;
+    });
+  }
+
+  settle(orderId: number) {
+    this._restProvider.updateBillStatus(orderId, 1).then(data => {
+      if(data) {
+        this.getBillOut();
+      }
     });
   }
 }

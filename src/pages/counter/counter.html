@@ -16,11 +16,16 @@
     </ion-segment>
   </div>
   
-  <div [ngSwitch]="state">
+  <div [ngSwitch]="state" class="counter">
     <ion-list *ngSwitchCase="'billOuts'">
-      <ion-item inset *ngFor="let data of billOuts; let index = index">
+      <ion-item inset *ngFor="let data of billOuts; let index = index" class="padding-all">
         <h2>Table number: {{data.table_id}} </h2>
         <p><strong>Total</strong>: {{data.total_amount}}</p>
+        <p><strong >Current Status: 
+            <span class="color-red" *ngIf="data.bill_status == 0">Not Yet Settled</span>
+            <span class="color-red" *ngIf="data.bill_status == 1">Settled</span>
+        </strong></p>
+        <button item-end class="button-clear-md" *ngIf="data.bill_status == 0" (click)="settle(data.order_id)" >Settle</button>
       </ion-item>
     </ion-list>
   </div>

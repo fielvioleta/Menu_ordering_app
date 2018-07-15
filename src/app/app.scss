@@ -3717,6 +3717,9 @@
   padding-left: 10px;
 }
 
+.padding-all {
+  padding: 10px;
+}
 
 /**
  * Grid
@@ -5033,3 +5036,7 @@ a.button .icon:before, a.button.icon:before, a.button.icon-left:before, a.button
 .products-list .item {
   padding: 8px !important;
 }
+
+.color-black { color: #000 !important; }
+.color-red { color: red !important; }
+.color-green { color: green !important; }

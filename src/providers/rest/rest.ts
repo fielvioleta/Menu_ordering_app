@@ -208,6 +208,20 @@ export class RestProvider {
     });
   }
   
+  updateBillStatus(orderId: number, status: number) {
+    const params = {
+      'id'  : orderId,
+      'status'  : status,
+    }
+    return new Promise(resolve => {
+      this.http.post(this.domain+'/apis/updateBillStatus', params, {headers: {'Content-Type': 'application/json'}}).subscribe(data => {
+        resolve(data);
+      }, err => {
+        alert(JSON.stringify(err));
+      });
+    });
+  }
+
   updateAvailability(productId: number, availability: number) {
     const params = {
       'id'            : productId,
