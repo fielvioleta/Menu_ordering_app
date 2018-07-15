@@ -19,7 +19,7 @@
     </ion-segment>
   </div>
   
-  <div [ngSwitch]="state">
+  <div [ngSwitch]="state" class="kitchen">
     <ion-list *ngSwitchCase="'orders'">
       <ion-item *ngFor="let order of orders; let index = index">
         <ion-thumbnail item-start>

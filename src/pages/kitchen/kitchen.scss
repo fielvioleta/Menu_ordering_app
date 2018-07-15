@@ -4,4 +4,20 @@ page-kitchen {
     }
     .color-red { color: red; }
     .color-green { color: green; }
+
+    .segment-button { 
+        font-size: 1.6rem !important;
+        height: 4.2rem !important;
+        line-height: 4rem !important;
+    }
+
+    
+
+    .kitchen {
+        line-height: 2rem;
+        
+        h2 { font-size: 2rem; }
+        p { font-size: 1.6rem; }
+        .button-clear-md { font-size: 1.6rem; }
+    }
 }

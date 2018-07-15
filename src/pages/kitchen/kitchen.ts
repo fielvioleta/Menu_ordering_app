@@ -46,15 +46,15 @@ export class KitchenPage {
   }
   
   ionViewDidLoad() {
-    this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
+    // this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.LANDSCAPE);
 
-    this.fcm.subscribeToTopic('kitchen');
-    this.fcm.onNotification().subscribe(data => {
-      this._ngZone.run(()=> {
-        this.getOrders();
-        this.getProducts();
-      });
-    });
+    // this.fcm.subscribeToTopic('kitchen');
+    // this.fcm.onNotification().subscribe(data => {
+    //   this._ngZone.run(()=> {
+    //     this.getOrders();
+    //     this.getProducts();
+    //   });
+    // });
 
     this.navBar.backButtonClick = (e:UIEvent)=>{
      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
