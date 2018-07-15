@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController  } from 'ionic-angular';
+import { NavController, AlertController, MenuController } from 'ionic-angular';
 import { DomSanitizer } from '@angular/platform-browser';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Toast } from '@ionic-native/toast';
@@ -17,13 +17,15 @@ export class HomePage {
   images = [];
 
   constructor(
-    public navCtrl: NavController,
-    public alertCtrl: AlertController,
-    private _sanitizer: DomSanitizer,
-    private _rest: RestProvider,
     private barcodeScanner: BarcodeScanner,
     private toast: Toast,
+    public _navCtrl: NavController,
+    public _alertCtrl: AlertController,
+    public _sanitizer: DomSanitizer,
+    public _rest: RestProvider,
+    public _menu: MenuController
   ) {
+    this._menu.enable(false, 'myMenu');
     this.images.push(
       { imagePath: this._sanitizer.bypassSecurityTrustStyle(`url(assets/imgs/welcome-1.jpg)`)},
       { imagePath: this._sanitizer.bypassSecurityTrustStyle(`url(assets/imgs/welcome-2.jpg)`)},
@@ -33,7 +35,7 @@ export class HomePage {
   }
 
   crewLogin() {
-    const prompt = this.alertCtrl.create({
+    const prompt = this._alertCtrl.create({
       title: 'Login',
       message: "Please enter username and password for kitchen or counter",
       inputs: [
@@ -59,9 +61,9 @@ export class HomePage {
               if(!res) {
                 alert( 'Username and password is incorrect' );
               } else if ( res['user_type'] == 3 ) { // kitchen
-                this.navCtrl.push(KitchenPage);
+                this._navCtrl.push(KitchenPage);
               } else if( res['user_type'] == 2) { //counter
-                this.navCtrl.push(CounterPage);
+                this._navCtrl.push(CounterPage);
               }
             });
           }
@@ -74,7 +76,7 @@ export class HomePage {
   scan() {
     this.barcodeScanner.scan().then((barcodeData) => {
       // need to store tableid
-      this.navCtrl.push(LandingPage);
+      this._navCtrl.push(LandingPage);
     }, (err) => {
       this.toast.show(err, '5000', 'center').subscribe(
         toast => {

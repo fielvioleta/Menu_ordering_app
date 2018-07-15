@@ -1,5 +1,5 @@
 import { Component, NgZone } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, MenuController } from 'ionic-angular';
 
 import { GlobalProvider } from './../../providers/global/global';
 import { RestProvider } from '../../providers/rest/rest';
@@ -21,7 +21,10 @@ export class CartPage {
     public _restProvider: RestProvider,
     private fcm: FCM,
     private _ngZone: NgZone,
+    private _menu: MenuController
   ) { 
+    this._menu.enable(true, 'myMenu');
+    
     this.fcm.subscribeToTopic('table'+this._globalProvider.tableId.getValue());
     this.fcm.onNotification().subscribe(data => {
       this._ngZone.run(()=> {

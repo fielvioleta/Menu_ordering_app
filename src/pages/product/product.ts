@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { GlobalProvider } from './../../providers/global/global';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 /**
@@ -21,8 +21,10 @@ export class ProductPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public _globalProvider: GlobalProvider,
-    public _alerCtrl: AlertController
+    public _alerCtrl: AlertController,
+    private _menu: MenuController
   ) {
+    this._menu.enable(true, 'myMenu');
     this.product = this.navParams.data; 
   }
 

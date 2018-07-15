@@ -1,6 +1,6 @@
 import { RestProvider } from './../../providers/rest/rest';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 
 import { ProductPage } from './../product/product';
 
@@ -24,8 +24,10 @@ export class ProductsPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public restProvider: RestProvider
+    public restProvider: RestProvider,
+    private _menu: MenuController
   ) {
+    this._menu.enable(true, 'myMenu');
     this.categoryId   = this.navParams.data.categoryId;
     this.categoryName = this.navParams.data.categoryName
 
